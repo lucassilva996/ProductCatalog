@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="flunt" Version="1.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="2.1.1" />

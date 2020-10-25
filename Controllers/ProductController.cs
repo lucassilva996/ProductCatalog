@@ -82,7 +82,34 @@ namespace ProductCatalog.Controllers
         public ResultViewModel Put ([FromBody] EditorProductViewModel model)
         {
             model.Validate();
-            if(model.validate)
+            if(model.Invalid)
+                return new ResultViewModel
+                {
+                    Success = false,
+                    Message = "Não foi possível alterar o produto",
+                    Data = model.Notifications
+
+                };
+
+                var product = _context.Products.Find(model.id);
+                product.Title = model.Title;
+                product.CategoryId = model.CategoryId;
+                product.Description = model.Description;
+                product.Image = model.Image;
+                product.LastUpdateDate = DateTime.Now;
+                product.Price = model.Price;
+                product.Quantity = model.Quantity;
+
+                _context.Entry<Product>(product).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return new ResultViewModel
+                {
+                    Success = true,
+                    Message = "Produto alterado com sucesso!",
+                    Data = product
+                };
+
         }
     }
 }
